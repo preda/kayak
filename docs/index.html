@@ -1,5 +1,86 @@
+<!DOCTYPE HTML>
 <html>
-    <body>
-        hello
-    </body>
+<head>
+<style>
+table {  border-spacing: 10px; }
+td { padding: 10px }
+
+</style>
+</head>
+
+<body>
+
+<script>
+"use strict"
+
+let times =[38.590, 107.046, 97.810, 89.418, 33.741, 95.544, 204.006, 86.860, 78.163];
+
+function strtime(t) {
+let m = Math.floor(t / 60);
+let s = t - m * 60;
+return m + ':' + (s + 100).toFixed(2).substring(1);
+}
+
+function setPercent() {
+let percent = parseInt(document.getElementById("percent").value, 10);
+if (percent >= 30 && percent <= 101) {
+document.getElementById("time").value = '';
+document.getElementById("p0").textContent='' + percent + '%';
+document.getElementById("p1").textContent='' + percent + '%';
+let ratio = 100 / percent;
+
+for (let i = 0; i < 9; i++) {
+document.getElementById("t" + i).textContent=strtime(times[i] * ratio);
+}
+}
+}
+
+function setTime() {
+let str = document.getElementById("time").value;
+let p = str.indexOf(':');
+let m = (p == -1) ? 0 : parseInt(str.substr(0, p), 10);
+let s = parseFloat(str.substr(p+1));
+let t = m * 60 + s;
+if (t >= 30 && t <= 360) {
+document.getElementById("percent").value = '';
+let st = strtime(t);
+document.getElementById("p0").textContent=st;
+document.getElementById("p1").textContent=st;
+for (let i = 0; i < 9; ++i) {
+let p = times[i] / t * 100;
+let text = (p >= 30 && p <= 100) ? p.toFixed(1) + ' %' : '';
+document.getElementById('t' + i).textContent=text;
+}
+}
+}
+
+window.onload = setPercent
+
+// alert( 'Hello, world!' );
+</script>
+<table border="0" style="border-collapse: collapse;">
+<tr><th colspan="2">Women <span id="p0"></span></th></tr>
+
+<tr><td>K1 200</td><td id="t0"></td></tr>
+<tr><td>K1 500</td><td id="t1"></td></tr>
+<tr><td>K2 500</td><td id="t2"></td></tr>
+<tr><td>K4 500</td><td id="t3"></td></tr>
+<tr border="0"><td>&nbsp;</td></tr>
+<tr><th colspan="2">Men <span id="p1"></span></th></tr>
+
+<tr><td>K1 200</td><td id="t4"></td></tr>
+<tr><td>K1 500</td><td id="t5"></td></tr>
+<tr><td>K1 1000</td><td id="t6"></td></tr>
+<tr><td>K2 500</td><td id="t7"></td></tr>
+<tr><td>K4 500</td><td id="t8"></td></tr>
+
+</table>
+
+<form action="" method="POST">
+<table>
+<tr><td>Set percent : </td> <td><input type="text" id="percent" oninput='setPercent()' onblur='setPercent()' value="83" size="5" />%</td></tr>
+<tr><td>Set time : </td> <td><input type="text" id="time" oninput='setTime()' onblur='setTime()' value="0" size="5" />s</td></tr>
+</form>
+
+</body>
 </html>
