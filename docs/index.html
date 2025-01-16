@@ -117,10 +117,10 @@ body { font-size: 120%; }
 <tr class='C'><td>&nbsp;</td></tr>
 
 <tr><td colspan="5" class='C' style='text-align:left'>
-<form action='kayak' method="GET">
+<form>
 See where you stand, discover your percentage of World's Best!<br/>
 Enter your time e.g. "2:30" :
-<input style="font-size:100%" type="text" id="time" oninput='setTime()' onblur='setTime()' value="" size="6" /> s
+<input style="font-size:100%" type="text" id="time" name="time" oninput='setTime()' onblur='setTime()' value="" size="6" /> s
 </form>
 </td>
 </tr>
@@ -128,10 +128,10 @@ Enter your time e.g. "2:30" :
 <tr class='C'><td>&nbsp;</td></tr>
 
 <tr><td colspan="5" class='C' style='text-align:left'>
-<form action='kayak' method="GET">
+<form>
 Or, see the times corresponding to your target percentage of World's Best!<br/>
 Enter percent e.g. "83": 
-<input style="font-size:100%" type="text" id="percent" oninput='setPercent()' onblur='setPercent()' value='81' size="4" /> %
+<input style="font-size:100%" type="text" id="percent" name="percent" oninput='setPercent()' onblur='setPercent()' value='81' size="4" /> %
 </form>
 </td></tr>
 
