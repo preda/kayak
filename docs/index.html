@@ -1,146 +1,56 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<script>
-"use strict"
-
-let times =[38.590, 107.046, 97.810, 89.418, 33.741, 95.544, 86.860, 78.163, 204.006];
-
-function strtime(t) {
-let m = Math.floor(t / 60);
-let s = t - m * 60;
-return m + ':' + (s + 100).toFixed(2).substring(1);
-}
-
-function setPercent() {
-let percent = parseFloat(document.getElementById("percent").value);
-if (percent >= 30 && percent <= 101) {
-document.getElementById("time").value = '';
-document.getElementById("p0").textContent='' + percent + '%';
-document.getElementById("p1").textContent='' + percent + '%';
-let ratio = 100 / percent;
-
-for (let i = 0; i < 9; i++) {
-document.getElementById("t" + i).textContent=strtime(times[i] * ratio);
-}
-}
-}
-
-function setTime() {
-let str = document.getElementById("time").value;
-let p = str.indexOf(':');
-let m = (p == -1) ? 0 : parseInt(str.substr(0, p), 10);
-let s = parseFloat(str.substr(p+1));
-let t = m * 60 + s;
-if (t >= 30 && t <= 360) {
-document.getElementById("percent").value = '';
-let st = strtime(t);
-document.getElementById("p0").textContent=st;
-document.getElementById("p1").textContent=st;
-for (let i = 0; i < 9; ++i) {
-let p = times[i] / t * 100;
-let text = (p >= 30 && p <= 100) ? p.toFixed(1) + ' %' : '';
-document.getElementById('t' + i).textContent=text;
-}
-}
-}
-
-function both() {
-
-let path = window.location.search;
-let p = path.indexOf('?percent=');
-if (p >= 0) {
-let per = parseFloat(path.substring(p + 9));
-if (per >= 30 && per <= 101) {
-document.getElementById('percent').value = per.toFixed(1);
-}
-}
-setPercent();
-setTime();
-}
-
-window.onload = both
-</script>
-
 <style>
-
-@media (prefers-color-scheme: light) {
-    body {
-        background-color: white;
-        color: black;
-    }
-    .A { background-color:#ffe }
-    .B { background-color:#eff }
-    .C { background-color: white; }
+table th { padding: 10px; border-spacing: 0px; }
+table tr:nth-child(odd) td {
+  background:#fff;
 }
-
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: black;
-        color: #ffd;
-    }
-    .A { background-color:#113 }
-    .B { background-color:#121 }
-    .C { background-color: black; }
+table tr:nth-child(even) td{
 }
-
-table {  border-spacing: 10px; }
-td { padding: 12px; }
-body { font-size: 120%; }
-.center { margin-left: auto; margin-right: auto; }
+.W { background-color: #fef }
+.M { background-color: #eff }
 </style>
 </head>
-
-
 <body style='text-align:center'>
-<title>Kayak World Best Times</title>
-<h3 style='text-align:center'>Kayak performance relative to World's Best Times</h3>
-
-<table border="0" style="border-collapse: collapse;" class="center">
+<table border="0" style="border-collapse: collapse; margin-left:auto; margin-right:auto;" >
 <colgroup>
-    <col class='A'>
-    <col class='B'>
-    <col class='A'>
-    <col class='B'>
-    <col class='A'>
+<col class='W'>
+<col class='W'>
+<col class='W'>
+<col class='W'>
+<col>
+<col class='M'>
+<col class='M'>
+<col class='M'>
+<col class='M'>
 </colgroup>
-<tr><th colspan="5" class='C'>Women @ <span id="p0"></span></th></tr>
-<tr><td>K1 200</td><td>K1 500</td><td>K2 500</td><td>K4 500</td><td></td></tr>
-<tr><td id="t0"></td><td id="t1"></td><td id="t2"></td><td id="t3"></td><td></td></tr>
+<tr><th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th> <th>WK1 200</th> <th>WK1 500</th> <th>WK1 1000</th> <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th> <th>MK1 200</th><th>MK1 500</th><th>MK1 1000</th> <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th><tr>
 
-<tr class='C'><td>&nbsp;</td></tr>
+<tr> <td>100% </td> <td> 38.6 </td> <td> 1:47 </td> <td> 3:50 </td> <td> </td> <td> 33.7 </td> <td> 1:36 </td> <td> 3:24 </td> <td>100% </td></tr>
+<tr> <td> 90% </td> <td> 42.9 </td> <td> 1:59 </td> <td> 4:16 </td> <td> </td> <td> 37.5 </td> <td> 1:46 </td> <td> 3:47 </td> <td> 90% </td></tr>
+<tr> <td> 89% </td> <td> 43.4 </td> <td> 2:00 </td> <td> 4:19 </td> <td> </td> <td> 37.9 </td> <td> 1:47 </td> <td> 3:49 </td> <td> 89% </td></tr>
+<tr> <td> 88% </td> <td> 43.9 </td> <td> 2:02 </td> <td> 4:22 </td> <td> </td> <td> 38.3 </td> <td> 1:49 </td> <td> 3:52 </td> <td> 88% </td></tr>
+<tr> <td> 87% </td> <td> 44.4 </td> <td> 2:03 </td> <td> 4:25 </td> <td> </td> <td> 38.8 </td> <td> 1:50 </td> <td> 3:54 </td> <td> 87% </td></tr>
+<tr> <td> 86% </td> <td> 44.9 </td> <td> 2:04 </td> <td> 4:28 </td> <td> </td> <td> 39.2 </td> <td> 1:51 </td> <td> 3:57 </td> <td> 86% </td></tr>
+<tr> <td> 85% </td> <td> 45.4 </td> <td> 2:06 </td> <td> 4:31 </td> <td> </td> <td> 39.7 </td> <td> 1:52 </td> <td> 4:00 </td> <td> 85% </td></tr>
+<tr> <td> 84% </td> <td> 45.9 </td> <td> 2:07 </td> <td> 4:34 </td> <td> </td> <td> 40.2 </td> <td> 1:54 </td> <td> 4:03 </td> <td> 84% </td></tr>
+<tr> <td> 83% </td> <td> 46.5 </td> <td> 2:09 </td> <td> 4:38 </td> <td> </td> <td> 40.7 </td> <td> 1:55 </td> <td> 4:06 </td> <td> 83% </td></tr>
+<tr> <td> 82% </td> <td> 47.1 </td> <td> 2:11 </td> <td> 4:41 </td> <td> </td> <td> 41.1 </td> <td> 1:57 </td> <td> 4:09 </td> <td> 82% </td></tr>
+<tr> <td> 81% </td> <td> 47.6 </td> <td> 2:12 </td> <td> 4:45 </td> <td> </td> <td> 41.7 </td> <td> 1:58 </td> <td> 4:12 </td> <td> 81% </td></tr>
+<tr> <td> 80% </td> <td> 48.2 </td> <td> 2:14 </td> <td> 4:48 </td> <td> </td> <td> 42.2 </td> <td> 1:59 </td> <td> 4:15 </td> <td> 80% </td></tr>
+<tr> <td> 79% </td> <td> 48.8 </td> <td> 2:16 </td> <td> 4:52 </td> <td> </td> <td> 42.7 </td> <td> 2:01 </td> <td> 4:18 </td> <td> 79% </td></tr>
+<tr> <td> 78% </td> <td> 49.5 </td> <td> 2:17 </td> <td> 4:56 </td> <td> </td> <td> 43.3 </td> <td> 2:02 </td> <td> 4:22 </td> <td> 78% </td></tr>
+<tr> <td> 77% </td> <td> 50.1 </td> <td> 2:19 </td> <td> 4:59 </td> <td> </td> <td> 43.8 </td> <td> 2:04 </td> <td> 4:25 </td> <td> 77% </td></tr>
+<tr> <td> 76% </td> <td> 50.8 </td> <td> 2:21 </td> <td> 5:03 </td> <td> </td> <td> 44.4 </td> <td> 2:06 </td> <td> 4:28 </td> <td> 76% </td></tr>
+<tr> <td> 75% </td> <td> 51.5 </td> <td> 2:23 </td> <td> 5:07 </td> <td> </td> <td> 45.0 </td> <td> 2:07 </td> <td> 4:32 </td> <td> 75% </td></tr>
+<tr> <td> 74% </td> <td> 52.1 </td> <td> 2:25 </td> <td> 5:11 </td> <td> </td> <td> 45.6 </td> <td> 2:09 </td> <td> 4:36 </td> <td> 74% </td></tr>
+<tr> <td> 73% </td> <td> 52.9 </td> <td> 2:27 </td> <td> 5:16 </td> <td> </td> <td> 46.2 </td> <td> 2:11 </td> <td> 4:39 </td> <td> 73% </td></tr>
+<tr> <td> 72% </td> <td> 53.6 </td> <td> 2:29 </td> <td> 5:20 </td> <td> </td> <td> 46.9 </td> <td> 2:13 </td> <td> 4:43 </td> <td> 72% </td></tr>
+<tr> <td> 71% </td> <td> 54.4 </td> <td> 2:31 </td> <td> 5:25 </td> <td> </td> <td> 47.5 </td> <td> 2:15 </td> <td> 4:47 </td> <td> 71% </td></tr>
+<tr> <td> 70% </td> <td> 55.1 </td> <td> 2:33 </td> <td> 5:29 </td> <td> </td> <td> 48.2 </td> <td> 2:16 </td> <td> 4:51 </td> <td> 70% </td></tr>
 
-<tr><th colspan="5" class='C'>Men @ <span id="p1"></span></th></tr>
-<tr><td>K1 200</td><td>K1 500</td><td>K2 500</td><td>K4 500</td><td>K1 1000</td></tr>
-<tr><td id="t4"></td><td id="t5"></td><td id="t6"></td><td id="t7"></td><td id="t8"></td></tr>
-
-<tr class='C'><td>&nbsp;</td></tr>
-
-<tr><td colspan="5" class='C' style='text-align:left'>
-<form>
-See where you stand, discover your percentage of World's Best!<br/>
-Enter your time e.g. "2:30" :
-<input style="font-size:100%" type="text" id="time" name="time" oninput='setTime()' onblur='setTime()' value="" size="6" /> s
-</form>
-</td>
-</tr>
-
-<tr class='C'><td>&nbsp;</td></tr>
-
-<tr><td colspan="5" class='C' style='text-align:left'>
-<form>
-Or, see the times corresponding to your target percentage of World's Best!<br/>
-Enter percent e.g. "83": 
-<input style="font-size:100%" type="text" id="percent" name="percent" oninput='setPercent()' onblur='setPercent()' value='81' size="4" /> %
-</form>
-</td></tr>
-
-<tr class='C'><td>&nbsp;</td></tr>
-
-<tr><td colspan="5" class='C' style='text-align:left'>
-Note: the 100% level was computed as the average of the top 5 World's Best Times as determined by the ICF.
-</td>
-</tr>
 </table>
 </body>
 </html>
+

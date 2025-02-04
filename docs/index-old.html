@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script>
+"use strict"
+
+let times =[38.590, 107.046, 97.810, 89.418, 33.741, 95.544, 86.860, 78.163, 204.006];
+
+function strtime(t) {
+let m = Math.floor(t / 60);
+let s = t - m * 60;
+return m + ':' + (s + 100).toFixed(2).substring(1);
+}
+
+function setPercent() {
+let percent = parseFloat(document.getElementById("percent").value);
+if (percent >= 30 && percent <= 101) {
+document.getElementById("time").value = '';
+document.getElementById("p0").textContent='' + percent + '%';
+document.getElementById("p1").textContent='' + percent + '%';
+let ratio = 100 / percent;
+
+for (let i = 0; i < 9; i++) {
+document.getElementById("t" + i).textContent=strtime(times[i] * ratio);
+}
+}
+}
+
+function setTime() {
+let str = document.getElementById("time").value;
+let p = str.indexOf(':');
+let m = (p == -1) ? 0 : parseInt(str.substr(0, p), 10);
+let s = parseFloat(str.substr(p+1));
+let t = m * 60 + s;
+if (t >= 30 && t <= 360) {
+document.getElementById("percent").value = '';
+let st = strtime(t);
+document.getElementById("p0").textContent=st;
+document.getElementById("p1").textContent=st;
+for (let i = 0; i < 9; ++i) {
+let p = times[i] / t * 100;
+let text = (p >= 30 && p <= 100) ? p.toFixed(1) + ' %' : '';
+document.getElementById('t' + i).textContent=text;
+}
+}
+}
+
+function both() {
+
+let path = window.location.search;
+let p = path.indexOf('?percent=');
+if (p >= 0) {
+let per = parseFloat(path.substring(p + 9));
+if (per >= 30 && per <= 101) {
+document.getElementById('percent').value = per.toFixed(1);
+}
+}
+setPercent();
+setTime();
+}
+
+window.onload = both
+</script>
+
+<style>
+
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: white;
+        color: black;
+    }
+    .A { background-color:#ffe }
+    .B { background-color:#eff }
+    .C { background-color: white; }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: black;
+        color: #ffd;
+    }
+    .A { background-color:#113 }
+    .B { background-color:#121 }
+    .C { background-color: black; }
+}
+
+table {  border-spacing: 10px; }
+td { padding: 12px; }
+body { font-size: 120%; }
+.center { margin-left: auto; margin-right: auto; }
+</style>
+</head>
+
+
+<body style='text-align:center'>
+<title>Kayak World Best Times</title>
+<h3 style='text-align:center'>Kayak performance relative to World's Best Times</h3>
+
+<table border="0" style="border-collapse: collapse;" class="center">
+<colgroup>
+    <col class='A'>
+    <col class='B'>
+    <col class='A'>
+    <col class='B'>
+    <col class='A'>
+</colgroup>
+<tr><th colspan="5" class='C'>Women @ <span id="p0"></span></th></tr>
+<tr><td>K1 200</td><td>K1 500</td><td>K2 500</td><td>K4 500</td><td></td></tr>
+<tr><td id="t0"></td><td id="t1"></td><td id="t2"></td><td id="t3"></td><td></td></tr>
+
+<tr class='C'><td>&nbsp;</td></tr>
+
+<tr><th colspan="5" class='C'>Men @ <span id="p1"></span></th></tr>
+<tr><td>K1 200</td><td>K1 500</td><td>K2 500</td><td>K4 500</td><td>K1 1000</td></tr>
+<tr><td id="t4"></td><td id="t5"></td><td id="t6"></td><td id="t7"></td><td id="t8"></td></tr>
+
+<tr class='C'><td>&nbsp;</td></tr>
+
+<tr><td colspan="5" class='C' style='text-align:left'>
+<form>
+See where you stand, discover your percentage of World's Best!<br/>
+Enter your time e.g. "2:30" :
+<input style="font-size:100%" type="text" id="time" name="time" oninput='setTime()' onblur='setTime()' value="" size="6" /> s
+</form>
+</td>
+</tr>
+
+<tr class='C'><td>&nbsp;</td></tr>
+
+<tr><td colspan="5" class='C' style='text-align:left'>
+<form>
+Or, see the times corresponding to your target percentage of World's Best!<br/>
+Enter percent e.g. "83": 
+<input style="font-size:100%" type="numeric" id="percent" name="percent" oninput='setPercent()' onblur='setPercent()' value='81' size="4" /> %
+</form>
+</td></tr>
+
+<tr class='C'><td>&nbsp;</td></tr>
+
+<tr><td colspan="5" class='C' style='text-align:left'>
+Note: the 100% level was computed as the average of the top 5 World's Best Times as determined by the ICF.
+</td>
+</tr>
+</table>
+</body>
+</html>
